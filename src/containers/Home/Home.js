@@ -62,9 +62,10 @@ function Home() {
                 </Link>
                 </div> */}
             </div>
-            <Footer>
+            <Footer
+            title=""
+            description="卡伯科技有限公司 台北市基隆路一段178號7樓"/>
 
-            </Footer>
         </div>
     );
 }
