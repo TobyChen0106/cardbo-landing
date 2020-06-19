@@ -62,8 +62,6 @@ const Cta = ({
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const result = re.test(String(userEmail).toLowerCase());
     if (result) {
-      
-
       const newData = {
         userEmail: userEmail,
         userInfo: userInfo,
@@ -80,16 +78,16 @@ const Cta = ({
         headers: new Headers({
           'Content-Type': 'application/json'
         })
-      }).catch(function (error) {
-        window.alert("[Error] " + error);
       }).then(
         res => res.json()
       ).then((data) => {
         if(data === "ERR"){
-          props.createNotification('warning', 'Connection Error');
+          props.createNotification('warning', 'Connection Error', '');
         }else{
           props.createNotification('success', 'Received', userEmail);
         }
+      }).catch(function (error) {
+        window.alert("[Error] " + error);
       })
 
       document.getElementById('user-email').value = "";

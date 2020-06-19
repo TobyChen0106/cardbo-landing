@@ -7,6 +7,7 @@ router.post('/save-user-contact', (req, res) => {
     const newContact = new UserContact(newdata);
     newContact.save().then((data) => {
         console.log(`[User Contact!] <${data.time}> ${data.userEmail}: ${data.userInfo}`);
+        res.json("OK");
     }).catch(function (error) {
         console.log("[Error] " + error);
         res.json("ERR");
