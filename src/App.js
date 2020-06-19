@@ -1,32 +1,50 @@
-import React, { Component } from 'react';
-import './App.css';
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "./containers/Home/Home";
-import { Cookies } from 'react-cookie';
+import React, { useRef, useEffect } from 'react';
+import { useLocation, Switch } from 'react-router-dom';
+import AppRoute from './utils/AppRoute';
+import ScrollReveal from './utils/ScrollReveal';
 
-const cookies = new Cookies();
+import ReactGA from 'react-ga';
 
-export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userEmail: cookies.get('cardbo-user-email'),
-      userPassword: cookies.get('cardbo-user-password'),
-    }
-    // console.log(this.state.userEmail);
-    // console.log(this.state.userPassword);
+// Layouts
+import LayoutDefault from './layouts/LayoutDefault';
 
-  }
-  onSavePassWord = () => {
+// Views 
+import Home from './views/Home';
+//css
+import './App.css'
+// Initialize Google Analytics
+ReactGA.initialize(process.env.REACT_APP_GA_CODE);
 
-  }
-  render() {
-    return (
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
-    );
-  }
+const trackPage = page => {
+  ReactGA.set({ page });
+  ReactGA.pageview(page);
+};
+
+const App = () => {
+
+  const childRef = useRef();
+  let location = useLocation();
+
+  useEffect(() => {
+    const page = location.pathname;
+    document.body.classList.add('is-loaded')
+    childRef.current.init();
+    trackPage(page);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
+
+ 
+  return (
+    <>
+      <ScrollReveal
+        ref={childRef}
+        children={() => (
+          <Switch>
+            <AppRoute exact path="/" component={Home} layout={LayoutDefault}/>
+          </Switch>
+        )} />
+    </>
+  );
 }
 
+export default App;

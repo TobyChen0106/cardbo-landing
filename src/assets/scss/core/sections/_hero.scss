@@ -1,0 +1,119 @@
+.hero {
+
+	.section-inner {
+		padding-top: $hero--padding-t__mobile;
+		padding-bottom: $hero--padding-b__mobile;
+	}
+}
+
+.hero-inner {
+
+	// Affects only hero full
+	> .hero-content + .hero-figure,
+	> .hero-figure + .hero-content {
+		margin-top: $hero--inner-padding-v_mobile;
+	}
+
+	> .hero-figure {
+
+		> a {
+			display: inline-flex;
+			// prevents stretching
+			align-items: center;
+			vertical-align: top;
+		}
+	}
+}
+
+@include media( '<=medium' ) {
+
+	.hero {
+
+		.split-wrap {
+
+			.split-item {
+
+				.split-item-content {
+					margin-bottom: $hero--inner-padding-v_mobile;
+				}
+			}
+
+			&.invert-mobile {
+
+				.split-item {
+
+					.split-item-image {
+						margin-bottom: $hero--inner-padding-v_mobile;
+					}
+				}
+			}
+		}
+	}
+}
+
+@include media( '>medium' ) {
+
+	.hero {
+
+		.section-inner {
+			padding-top: $hero--padding-t__desktop;
+			padding-bottom: $hero--padding-b__desktop;
+		}
+	}
+
+	.hero-inner {
+
+		// Affects only hero full
+		> .hero-content + .hero-figure,
+		> .hero-figure + .hero-content {
+			margin-top: $hero--inner-padding-v_desktop;
+		}
+	}
+}
+
+// @keyframes float {
+//     0% {
+//         box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+//         transform: translatey(0px);
+//     }
+//     50% {
+//         box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+//         transform: translatey(-20px);
+//     }
+//     100% {
+//         box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+//         transform: translatey(0px);
+//     }
+// }
+
+// .logo-qrcode-holder {
+// 	display: flex;
+// 	flex-direction: row wrap;
+// 	margin-top: 5rem;
+// 	margin-bottom: 5rem;
+// }
+
+// .qrcode {
+// 	margin: 5vw;
+// 	width: 20rem;
+//     height: 20rem;
+//     max-width: 40vw;
+//     max-height: 40vw;
+// }
+// .qrcode-img {
+// 	width:100%;
+// 	height:100%;
+// }
+// .avatar {
+//     width: 20rem;
+//     height: 20rem;
+//     max-width: 40vw;
+//     max-height: 40vw;
+//     /* box-sizing: border-box; */
+//     border: 0px white solid;
+//     border-radius: 50%;
+//     overflow: hidden;
+//     box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+//     transform: translatey(0px);
+//     animation: float 2s ease-in-out infinite;
+// }
