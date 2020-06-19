@@ -33,9 +33,9 @@ const UserContactSchema = new Schema({
     ip: {
         type: String,
     },
-    geoData: {
-        type: geoDataSchema,
-    },
+    // geoData: {
+    //     type: geoDataSchema,
+    // },
     userEmail: {
         type: String,
     },

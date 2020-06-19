@@ -76,33 +76,50 @@ const Cta = ({
         engineVersion: rdd.engineVersion,
         getUA: rdd.getUA,
         deviceType: rdd.deviceType,
-        geoData: ""
       }
-      request({
-        url: url,
-        json: true
-      }, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-          console.log(body);
-          newData.geoData = body;
+      // request({
+      //   url: url,
+      //   json: true
+      // }, function (error, response, body) {
+      //   if (!error && response.statusCode === 200) {
+      //     console.log(body);
+      //     newData.geoData = body;
+      //   }
+      //   fetch('/api/save-user-contact', {
+      //     method: 'POST',
+      //     body: JSON.stringify(newData),
+      //     headers: new Headers({
+      //       'Content-Type': 'application/json'
+      //     })
+      //   }).then(
+      //     res => res.json()
+      //   ).then((data) => {
+      //     if (data === "ERR") {
+      //       props.createNotification('warning', 'Connection Error', '');
+      //     } else {
+      //       props.createNotification('success', 'Received', userEmail);
+      //     }
+      //   }).catch(function (error) {
+      //     window.alert("[Error] " + error);
+      //   });
+      // });
+
+      fetch('/api/save-user-contact', {
+        method: 'POST',
+        body: JSON.stringify(newData),
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        })
+      }).then(
+        res => res.json()
+      ).then((data) => {
+        if (data === "ERR") {
+          props.createNotification('warning', 'Connection Error', '');
+        } else {
+          props.createNotification('success', 'Received', userEmail);
         }
-        fetch('/api/save-user-contact', {
-          method: 'POST',
-          body: JSON.stringify(newData),
-          headers: new Headers({
-            'Content-Type': 'application/json'
-          })
-        }).then(
-          res => res.json()
-        ).then((data) => {
-          if (data === "ERR") {
-            props.createNotification('warning', 'Connection Error', '');
-          } else {
-            props.createNotification('success', 'Received', userEmail);
-          }
-        }).catch(function (error) {
-          window.alert("[Error] " + error);
-        });
+      }).catch(function (error) {
+        window.alert("[Error] " + error);
       });
 
       document.getElementById('user-email').value = "";
