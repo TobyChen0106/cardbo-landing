@@ -8,6 +8,9 @@ import FileCopyIcon from '@material-ui/icons/FileCopy';
 import SendIcon from '@material-ui/icons/Send';
 import * as rdd from 'react-device-detect';
 
+var request = require("request");
+var url = "https://cors-anywhere.herokuapp.com/https://geolocation-db.com/json";
+
 const propTypes = {
   ...SectionProps.types,
   split: PropTypes.bool
@@ -61,6 +64,8 @@ const Cta = ({
     var userInfo = document.getElementById('user-info').value;
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const result = re.test(String(userEmail).toLowerCase());
+
+
     if (result) {
       const newData = {
         userEmail: userEmail,
@@ -71,24 +76,34 @@ const Cta = ({
         engineVersion: rdd.engineVersion,
         getUA: rdd.getUA,
         deviceType: rdd.deviceType,
+        geoData: ""
       }
-      fetch('/api/save-user-contact', {
-        method: 'POST',
-        body: JSON.stringify(newData),
-        headers: new Headers({
-          'Content-Type': 'application/json'
-        })
-      }).then(
-        res => res.json()
-      ).then((data) => {
-        if(data === "ERR"){
-          props.createNotification('warning', 'Connection Error', '');
-        }else{
-          props.createNotification('success', 'Received', userEmail);
+      request({
+        url: url,
+        json: true
+      }, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+          console.log(body);
+          newData.geoData = body;
         }
-      }).catch(function (error) {
-        window.alert("[Error] " + error);
-      })
+        fetch('/api/save-user-contact', {
+          method: 'POST',
+          body: JSON.stringify(newData),
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        }).then(
+          res => res.json()
+        ).then((data) => {
+          if (data === "ERR") {
+            props.createNotification('warning', 'Connection Error', '');
+          } else {
+            props.createNotification('success', 'Received', userEmail);
+          }
+        }).catch(function (error) {
+          window.alert("[Error] " + error);
+        });
+      });
 
       document.getElementById('user-email').value = "";
       document.getElementById('user-info').value = "";

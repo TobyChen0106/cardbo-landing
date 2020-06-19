@@ -1,9 +1,40 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+
+const geoDataSchema = new Schema({
+    country_code: {
+        type: String,
+    },
+    country_name: {
+        type: String,
+    },
+    city: {
+        type: String,
+    },
+    postal: {
+        type: String,
+    },
+    latitude: {
+        type: String,
+    },
+    longitude: {
+        type: String,
+    },
+    IPv4: {
+        type: String,
+    },
+    state: {
+        type: String,
+    },
+});
+
 const UserContactSchema = new Schema({
     ip: {
         type: String,
+    },
+    geoData: {
+        type: geoDataSchema,
     },
     userEmail: {
         type: String,
