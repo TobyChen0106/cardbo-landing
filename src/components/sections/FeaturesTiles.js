@@ -66,7 +66,7 @@ const FeaturesTiles = ({
             <div className="tiles-item reveal-from-bottom">
               <div className="tiles-item-inner">
                 <div className="features-tiles-item-header">
-                  <div className="features-tiles-item-image mb-16">
+                  <div className=" mb-16">
                     <Image
                       src={featureTileImage01}
                       alt="Features tile icon 01"
@@ -88,7 +88,7 @@ const FeaturesTiles = ({
             <div className="tiles-item reveal-from-bottom" data-reveal-delay="200">
               <div className="tiles-item-inner">
                 <div className="features-tiles-item-header">
-                  <div className="features-tiles-item-image mb-16">
+                  <div className="mb-16">
                     <Image
                       src={featureTileImage02}
                       alt="Features tile icon 02"
@@ -110,7 +110,7 @@ const FeaturesTiles = ({
             <div className="tiles-item reveal-from-bottom" data-reveal-delay="400">
               <div className="tiles-item-inner">
                 <div className="features-tiles-item-header">
-                  <div className="features-tiles-item-image mb-16">
+                  <div className="mb-16">
                     <Image
                       src={featureTileImage03}
                       alt="Features tile icon 03"
